@@ -14,6 +14,6 @@ before_script:
   - docker ps -a
   - npm start -- --silent &
 env:
-  - MONGODB_URI=mongodb://localhost/connect-mongo-test
+  - MONGO_URL=mongodb://localhost/connect-mongo-test
 script:
   - npm run test
