@@ -1,4 +1,19 @@
-sudo: true
+sudo: required
 language: node_js
+services:
+  - docker
 node_js:
-  - 12
+  - v12
+
+
+before_script:
+  ## we use the '&' ampersand which tells
+  ## travis to run this process in the background
+  ## else it would block execution and hang travis
+  - docker run -d -p 27017:27017 mongo:4.0
+  - docker ps -a
+  - npm start -- --silent &
+env:
+  - MONGO_URL=mongodb://localhost/connect-mongo-test
+script:
+  - npm run test
